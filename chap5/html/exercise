@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Code examples</title>
+    <link rel="stylesheet" href="../stylesheet.css">
+</head>
+
+<body>
+    <!-- If necessary, HTML code goes here -->
+    <!-- ... -->
+
+    <h1>Circle area and circumfernce calculator</h1>
+    <label for="input">Input the diameter of the circle in cm</label>
+    <input id="input" type="text" name="calculator" placeholder="cm">
+    <button id="btn">Calculate</button>
+
+    <h2 id="circleArea"></h2>
+    <h2 id="circleCirc"></h2>
+
+    <script src="../js/exercise.js"></script>
+</body>
+
+</html>
