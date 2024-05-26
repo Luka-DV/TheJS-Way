@@ -25,15 +25,15 @@ class Dog {
         }
     }
 }
-
-/* const fang = new Dog("Fang", "boarhound", 75);
+/* 
+const fang = new Dog("Fang", "boarhound", 75);
 console.log(`${fang.name} is a ${fang.species} dog measuring ${fang.size}`);
 console.log(`Look, a cat! ${fang.name} barks: ${fang.bark()}`);
 
 const snowy = new Dog("Snowy", "terrier", 22);
 console.log(`${snowy.name} is a ${snowy.species} dog measuring ${snowy.size}`);
-console.log(`Look, a cat! ${snowy.name} barks: ${snowy.bark()}`); */
-
+console.log(`Look, a cat! ${snowy.name} barks: ${snowy.bark()}`);
+ */
 
 
 /* +++Character inventory+++
@@ -93,7 +93,7 @@ Improve the example RPG to add character inventory management according to the f
       }
 
 
-/* const aurora = new Character("Aurora", 150, 25);
+const aurora = new Character("Aurora", 150, 25);
 const glacius = new Character("Glacius", 130, 30);
 
 console.log("Welcome to the adventure! Here are our heroes:");
@@ -109,7 +109,7 @@ aurora.attack(monster);
 glacius.attack(monster);
 
 console.log(aurora.describe());
-console.log(glacius.describe()); */
+console.log(glacius.describe());
 
 
 
@@ -125,7 +125,48 @@ Let's build upon a previous account object exercise. A bank account is still def
 Write a program that creates three accounts: one belonging to Sean, another to Brad and the third one to Georges. These accounts are stored in an array. Next, the program credits 1000 to each account and shows its description. */
 
 
-class bankAccount {
+//V3:
+
+class bankAccountS {
+    constructor(name) {
+        this.name = name;
+        this.balance = 0;
+    }
+
+    credit(valueAdded) {
+        this.balance += valueAdded;
+    }
+
+    decribe() {
+        return `${this.name} has ${this.balance} in his or hers bank account.`;
+    }
+}
+
+
+function createBankAccountsAndShow(...accounts) {
+
+    const newAccounts = accounts.map(account => new bankAccountS(account));
+
+    newAccounts.forEach(account => {
+        account.credit(1000);
+        console.log(account.decribe());
+    })
+
+    localStorage.setItem("bankAccounts", JSON.stringify(newAccounts));
+
+    //const storedAccounts = JSON.parse(localStorage.getItem("bankAccounts"));
+
+    console.log(JSON.parse(localStorage.getItem("bankAccounts")));
+}
+
+createBankAccountsAndShow("Sean", "Boby", "Brad", "Georges", "Maks");
+
+
+
+
+//V1:
+
+/* class bankAccount {
     constructor(name) {
         this.owner = name;
         this.balance = 0;
@@ -140,7 +181,6 @@ class bankAccount {
     }
 }
 
-
 function createAccountAndShowDescr(...names) {
     
     const bankAccountsArray = names.map(person => new bankAccount(person));
@@ -151,4 +191,41 @@ function createAccountAndShowDescr(...names) {
     });
 }
 
-console.log(createAccountAndShowDescr("Sean", "Brad", "Georges"));
+console.log(createAccountAndShowDescr("Sean", "Brad", "Georges")); */
+
+
+//SECOND VERSION:
+
+
+class BankAccount {
+    constructor(name) {
+        this.owner = name;
+        this.balance = 0;
+    }
+
+    credit(value) {
+        this.balance += value;
+    }
+
+    describe() {
+        return `owner: ${this.owner}, balance: ${this.balance}`
+    }
+}
+
+const sean = new BankAccount("Sean")
+//console.log(sean)
+
+
+
+function createAccountAndShowDescr(...names) {
+    
+    const bankAccountsArray = names.map(person => new BankAccount(person));
+
+    bankAccountsArray.forEach(account => {
+        account.credit(1000);
+        console.log(account.describe())
+    });
+}
+
+
+//createAccountAndShowDescr("andy", "john", "freddy");
